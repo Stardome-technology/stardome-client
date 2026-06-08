@@ -35,7 +35,7 @@ Third-party dependencies referenced in `.gitmodules` and materialized under `thi
 Clone with submodules so the third-party dependencies are present:
 
 ```bash
-git clone --recurse-submodules https://github.com/stefanopier/stardome-client.git
+git clone --recurse-submodules https://github.com/Stardome-technology/stardome-client.git
 ```
 
 If you already cloned the repo, initialize and update submodules before building:
