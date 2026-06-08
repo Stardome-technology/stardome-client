@@ -1,0 +1,92 @@
+#include "commands/command_common.hpp"
+#include "stardome_flags.h"
+#include "swp_bridge.h"
+
+#include <cstdint>
+#include <cstdlib>
+#include <iostream>
+#include <string>
+#include <vector>
+
+namespace stardome {
+
+namespace {
+
+constexpr size_t kMaxOffResponseBytes = 65535u;
+
+} // namespace
+
+int run_off_command(const AppConfig& cfg, int argc, char** argv) {
+    uint32_t wait_ms = 1200;
+
+    for (int i = 0; i < argc; ++i) {
+        const std::string arg = argv[i];
+        if (arg == "--help" || arg == "-h") {
+            std::cout << "Usage: stardome-client [options] off [--wait-ms N]\n";
+            return 0;
+        }
+        if (arg == "--wait-ms" && i + 1 < argc) {
+            wait_ms = static_cast<uint32_t>(std::strtoul(argv[++i], nullptr, 10));
+            continue;
+        }
+
+        std::cerr << "Unknown option for off: " << arg << "\n";
+        return 2;
+    }
+
+    std::string transport_error;
+    if (!configure_transport_for_command(cfg, transport_error)) {
+        std::cerr << transport_error << "\n";
+        return 2;
+    }
+
+    if (!swp_transport_open(cfg.port.c_str(), cfg.baud)) {
+        std::cerr << "Failed to open serial port: " << cfg.port << "\n";
+        return 2;
+    }
+
+    const bool sent = swp_transport_send(nullptr,
+                                         0,
+                                         static_cast<uint8_t>(FLAG_STARDOME_OFF | FLAG_LAST_FRAME),
+                                         ENCODING_BINARY);
+    if (!sent) {
+        std::cerr << "Failed to send off request\n";
+        swp_transport_close();
+        return 2;
+    }
+
+    std::vector<uint8_t> response_buf(kMaxOffResponseBytes, 0u);
+    uint16_t response_len = 0;
+    swp_rx_meta_t response_meta{};
+    const bool got_response = swp_transport_receive_ex(response_buf.data(),
+                                                       response_buf.size(),
+                                                       &response_len,
+                                                       &response_meta,
+                                                       wait_ms);
+    swp_transport_close();
+
+    if (!got_response) {
+        std::cout << "OFF request sent; no explicit response received in wait window (deferred off-state).\n";
+        return 0;
+    }
+
+    const std::vector<uint8_t> response(response_buf.begin(), response_buf.begin() + response_len);
+
+    const FrameClass frame_class = classify_stardome_response_flag(response_meta.flags, FLAG_STARDOME_OFF);
+    if (frame_class == FrameClass::Error) {
+        std::cerr << "Device reported off error (flags=" << format_flag_hex(response_meta.flags)
+                  << "): " << bytes_to_hex(response) << "\n";
+        return 1;
+    }
+    if (frame_class == FrameClass::Unexpected) {
+        std::cerr << "Unexpected off response frame (flags="
+                  << format_flag_hex(response_meta.flags)
+                  << ", payload=" << response.size() << " bytes)\n";
+        return 1;
+    }
+
+    std::cout << "off response: " << response.size() << " bytes\n";
+    return 0;
+}
+
+} // namespace stardome
