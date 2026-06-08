@@ -1,0 +1,20 @@
+[submodule "third_party/uart_sliding_window_protocol"]
+	path = third_party/uart_sliding_window_protocol
+	url = https://github.com/Stardome-technology/uart_sliding_window_protocol.git
+	branch = stardome-stripped
+[submodule "third_party/qcbor"]
+	path = third_party/qcbor
+	url = https://github.com/Stardome-technology/QCBOR.git
+	branch = stardome-stripped
+[submodule "third_party/merkle-tree"]
+	path = third_party/merkle-tree
+	url = https://github.com/Stardome-technology/merkle-tree3.git
+	branch = stardome-stripped
+[submodule "third_party/stardome-cbor-schemes"]
+	path = third_party/stardome-cbor-schemes
+	url = https://github.com/Stardome-technology/stardome-cbor-schemes.git
+	branch = main
+[submodule "third_party/xmss-reference"]
+	path = third_party/xmss-reference
+	url = https://github.com/Stardome-technology/xmss-reference.git
+	branch = stardome-stripped
