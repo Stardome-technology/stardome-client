@@ -29,6 +29,7 @@ int route_command(const AppConfig& cfg, int argc, char** argv) {
     if (command == "timestamp") return run_timestamp_command(cfg, sub_argc, sub_argv);
     if (command == "bootlog") return run_bootlog_command(cfg, sub_argc, sub_argv);
     if (command == "verify") return run_verify_command(cfg, sub_argc, sub_argv);
+    if (command == "endorse") return run_endorse_command(cfg, sub_argc, sub_argv);
 
     std::cerr << "Unknown command: " << command << "\n";
     return 2;

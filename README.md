@@ -90,6 +90,7 @@ Command-specific help:
 ./bin/stardome-client proof --help
 ./bin/stardome-client attestation --help
 ./bin/stardome-client attestation-file --help
+./bin/stardome-client endorse --help
 ./bin/stardome-client off --help
 ./bin/stardome-client lowmode --help
 ./bin/stardome-client highmode --help
@@ -170,6 +171,65 @@ Payload workflows:
 # Send prebuilt proof payload
 ./bin/stardome-client --port /dev/ttyUSB0 proof --payload-cbor proof_payload.cbor --out-proof stardome_proof.bin
 ```
+
+## Endorse command
+
+The `endorse` command produces a **module endorsement** for SEAD
+OrgGenesis bootstrap. It builds a `sign_request_payload` (SEAD v1.1.2
+scheme) and sends it via the standard `FLAG_SIGN` wire path — the same
+protocol used by `attestation`. The Stardome module treats the 4 input
+values as source-data leaves in its Merkle tree, signs the root, and
+returns the attestation.
+
+The command then extracts the `merkle_root` and `xmss_sig` from the
+attestation CBOR and prints them in hex, ready for `gen-bootstrap`.
+
+### Builder mode (recommended)
+
+```bash
+# Build [[org_id, org_pk, not_before_8be, not_after_8be], true] as
+# sign_request_payload, send via FLAG_SIGN, receive tree + attestation
+./bin/stardome-client --port /dev/ttyUSB0 endorse \
+  --org-id <org_id_hex> \
+  --org-pk <org_pk_hex> \
+  --not-before <unix_epoch_sec> \
+  --not-after <unix_epoch_sec> \
+  --out-tree module_tree.bin \
+  --out-attestation module_att.bin
+  --quiet
+```
+
+- `--not-before` defaults to current system time if omitted
+- `--not-after` defaults to `0` (no expiry) if omitted
+- Outputs `merkle_root` hex, `xmss_sig` hex, and the module's XMSS
+  public key — pass these to `gen-bootstrap org-genesis`:
+  ```
+  --module-merkle-root <merkle_root_hex>
+  --module-signature <sig_hex>
+  ```
+
+### Raw data mode
+
+```bash
+# Wrap raw hex bytes in [[<data>], true] and send via FLAG_SIGN
+./bin/stardome-client --port /dev/ttyUSB0 endorse \
+  --data-hex <hex>
+```
+
+`--data-hex` and the builder options are mutually exclusive.
+
+### Wire protocol
+
+| Direction | Flag | Encoding |
+|-----------|------|----------|
+| Request | `FLAG_SIGN` (0x02) | CBOR `sign_request_payload` |
+| Response 1 | `FLAG_STARDOME_TREE` (0x20) | CBOR tree |
+| Response 2 | `FLAG_STARDOME_ATTESTATION` (0x04) | CBOR attestation map |
+
+No new protocol flags were added — the `endorse` command reuses the
+existing `FLAG_SIGN` path that the firmware already handles. The module
+does not distinguish endorsement from attestation requests; it treats
+all source data uniformly.
 
 ## Third-party source policy (current phase)
 

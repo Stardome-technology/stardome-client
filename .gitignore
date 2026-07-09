@@ -38,6 +38,10 @@
 *.app
 
 # debug information files
+
+# ── Semble ──────────────────────────────────────────────────────────────────
+.semble-cache/
+.git/semble/
 *.dwo
  
 # Additional ignores for C development on Linux
