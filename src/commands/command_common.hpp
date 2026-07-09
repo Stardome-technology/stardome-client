@@ -51,5 +51,6 @@ int run_firmware_command(const AppConfig& cfg, int argc, char** argv);
 int run_timestamp_command(const AppConfig& cfg, int argc, char** argv);
 int run_bootlog_command(const AppConfig& cfg, int argc, char** argv);
 int run_verify_command(const AppConfig& cfg, int argc, char** argv);
+int run_endorse_command(const AppConfig& cfg, int argc, char** argv);
 
 } // namespace stardome

@@ -1,5 +1,7 @@
-CXX ?= g++
-CC ?= gcc
+# Pin to GCC 13 — GCC 15 (Ubuntu 26.04 default) introduces build-breaking changes.
+# Override at invocation: make CXX=g++-15 CC=gcc-15
+CXX ?= g++-13
+CC ?= gcc-13
 
 BIN_DIR := bin
 TARGET := $(BIN_DIR)/stardome-client
@@ -34,6 +36,7 @@ CPP_SRCS := \
 	src/commands/cmd_timestamp.cpp \
 	src/commands/cmd_bootlog.cpp \
 	src/commands/cmd_verify.cpp \
+	src/commands/cmd_endorse.cpp \
 	src/verify/stardome_attestation_verify.cpp \
 	src/transport/serial_port_linux.cpp
 
