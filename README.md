@@ -195,7 +195,7 @@ attestation CBOR and prints them in hex, ready for `gen-bootstrap`.
   --not-before <unix_epoch_sec> \
   --not-after <unix_epoch_sec> \
   --out-tree module_tree.bin \
-  --out-attestation module_att.bin
+  --out-attestation module_att.bin \
   --quiet
 ```
 
