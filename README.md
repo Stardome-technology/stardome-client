@@ -2,6 +2,8 @@
 
 Linux C++ client for Stardome SWP communication with MCU targets over UART.
 
+Builds with GCC 14 (default). GCC 15 is not yet supported.
+
 ## Licensing
 
 The root repository license applies to the `stardome-client` codebase itself.
@@ -63,6 +65,8 @@ Supported variables:
 CLI flags override `.env` values.
 
 ## Build
+
+Requires GCC 14. Override at invocation: `make CXX=g++-13 CC=gcc-13`.
 
 ```bash
 make clean && make -j4
