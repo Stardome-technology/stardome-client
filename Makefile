@@ -1,7 +1,7 @@
-# Pin to GCC 13 — GCC 15 (Ubuntu 26.04 default) introduces build-breaking changes.
+# Pin to GCC 14 — GCC 15 (Ubuntu 26.04 default) introduces build-breaking changes.
 # Override at invocation: make CXX=g++-15 CC=gcc-15
-CXX ?= g++-13
-CC ?= gcc-13
+CXX ?= g++-14
+CC ?= gcc-14
 
 BIN_DIR := bin
 TARGET := $(BIN_DIR)/stardome-client
