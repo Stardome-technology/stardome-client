@@ -256,13 +256,6 @@ git submodule status --recursive
 
 Client-owned XMSS wrapper and host utility code now lives under `src/xmss/platform`. The remaining copied trees are intentionally small snapshots required for build/runtime; we aim to convert more of these to submodules when practical.
 
-## Next steps
-
-- Replace local tree decode and leaf-hash verification in `src/verify/stardome_attestation_verify.cpp` with `third_party/merkle-tree` secure tree decode/verification helpers
-- Deepen frame-type-aware response demux (distinguish normal data vs explicit Stardome error frames)
-- Add hardware-backed parity runs against `stardome-local-python-client` command outputs
-- Add wire-compatibility and integration tests
-
 ## Updating Submodule Gitlinks
 
 When upstream for a submodule has advanced and you want the parent repo to point at the latest remote branch tip, follow these safe steps.
@@ -298,4 +291,10 @@ git commit -m "Update QCBOR submodule to origin/stardome-stripped"
 - Prefer creating a branch/PR in the submodule and merging upstream before updating the parent; that preserves reviewability.
 - `git submodule update --remote <path>` can be used to update a submodule to the tip of the branch configured in `.gitmodules` (if the submodule is configured to track a branch).
 - Always run a full build after updating submodules to verify compatibility.
+
+## Git workflow
+This repository follows GitHub Flow (https://docs.github.com/en/get-started/using-github/github-flow).
+The authoritative rules for contributors and agents are in the `## Git workflow`
+section of [AGENTS.md](AGENTS.md).
+
 
