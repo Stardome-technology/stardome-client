@@ -14,7 +14,7 @@ Third-party dependencies referenced in `.gitmodules` and materialized under `thi
 
 - Linux-only build with `gcc/g++` and `make`
 - C++ CLI scaffold with command surface aligned to Python client scripts:
-  - `status`, `id`, `lowmode`, `highmode`, `off`, `proof`, `attestation`, `attestation-file`, `firmware`, `timestamp`, `bootlog`, `verify`
+  - `status`, `ota-ta`, `id`, `lowmode`, `highmode`, `off`, `proof`, `attestation`, `attestation-file`, `firmware`, `timestamp`, `bootlog`, `verify`
 - SWP transport wired through the `uart_sliding_window_protocol` git submodule under `third_party/`
 - CBOR encode/decode migrated to the `QCBOR` git submodule under `third_party/`
 - `.env` configuration support for scheme and serial defaults

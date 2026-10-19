@@ -18,6 +18,7 @@ int route_command(const AppConfig& cfg, int argc, char** argv) {
     char** sub_argv = argv + 1;
 
     if (command == "status") return run_status_command(cfg, sub_argc, sub_argv);
+    if (command == "ota-ta") return run_ota_ta_command(cfg, sub_argc, sub_argv);
     if (command == "id") return run_id_command(cfg, sub_argc, sub_argv);
     if (command == "lowmode") return run_lowmode_command(cfg, sub_argc, sub_argv);
     if (command == "highmode") return run_highmode_command(cfg, sub_argc, sub_argv);

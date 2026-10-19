@@ -43,6 +43,7 @@ int run_attestation_command(const AppConfig& cfg, int argc, char** argv);
 int run_attestation_file_command(const AppConfig& cfg, int argc, char** argv);
 int run_proof_command(const AppConfig& cfg, int argc, char** argv);
 int run_status_command(const AppConfig& cfg, int argc, char** argv);
+int run_ota_ta_command(const AppConfig& cfg, int argc, char** argv);
 int run_id_command(const AppConfig& cfg, int argc, char** argv);
 int run_lowmode_command(const AppConfig& cfg, int argc, char** argv);
 int run_highmode_command(const AppConfig& cfg, int argc, char** argv);

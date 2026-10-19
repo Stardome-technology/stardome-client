@@ -17,6 +17,8 @@ constexpr uint8_t FLAG_STARDOME_LOWMODE = 0x50;
 constexpr uint8_t FLAG_STARDOME_HIGHMODE = 0x70;
 constexpr uint8_t FLAG_STARDOME_OFF = 0x80;
 constexpr uint8_t FLAG_STARDOME_STATUS_DATA = 0x90;
+constexpr uint8_t FLAG_STARDOME_OTA_TA = 0xA0;
+constexpr uint8_t FLAG_STARDOME_OTA_TA_ERROR = 0xA2;
 constexpr uint8_t FLAG_STARDOME_ID_DATA = 0xB0;
 constexpr uint8_t FLAG_STARDOME_PROOF_DATA = 0xB2;
 constexpr uint8_t FLAG_SIGN_ERROR = 0xC2;
@@ -27,6 +29,7 @@ constexpr uint8_t FLAG_STARDOME_ID_ERROR = 0xCC;
 constexpr uint8_t FLAG_STARDOME_OFF_ERROR = 0xCE;
 constexpr uint8_t FLAG_STARDOME_LOWMODE_ERROR = 0xD8;
 constexpr uint8_t FLAG_STARDOME_HIGHMODE_ERROR = 0xDA;
+constexpr uint8_t FLAG_STARDOME_OTA_TA_DATA = 0xE0;
 
 constexpr uint8_t ENCODING_BINARY = 0x00;
 constexpr uint8_t ENCODING_ASCII = 0x01;

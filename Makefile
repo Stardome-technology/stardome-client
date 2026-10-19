@@ -27,6 +27,7 @@ CPP_SRCS := \
 	src/config/env_loader.cpp \
 	src/commands/command_common.cpp \
 	src/commands/cmd_status.cpp \
+	src/commands/cmd_ota_ta.cpp \
 	src/commands/cmd_host_id.cpp \
 	src/commands/cmd_mode.cpp \
 	src/commands/cmd_off.cpp \

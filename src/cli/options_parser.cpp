@@ -86,7 +86,7 @@ void print_usage() {
         << "  --malform-count <n>   Inject malformed DATA frames into the next sent sequence\n"
         << "  --malform-kind <kind> Malformation kind: crc_payload | crc_header | token_bad | len_over | len_mismatch | seq_jump | encoding_invalid | truncate_tail | all\n\n"
         << "Commands:\n"
-        << "  status | id | lowmode | highmode | off | proof | attestation | attestation-file | endorse | firmware | timestamp | bootlog | verify\n\n"
+        << "  status | ota-ta | id | lowmode | highmode | off | proof | attestation | attestation-file | endorse | firmware | timestamp | bootlog | verify\n\n"
         << "Command help:\n"
         << "  stardome-client proof --help\n"
         << "  stardome-client attestation --help\n"

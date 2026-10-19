@@ -31,6 +31,7 @@ bool is_stardome_error_flag(uint8_t received_flags) {
         case FLAG_STARDOME_OFF_ERROR:
         case FLAG_STARDOME_LOWMODE_ERROR:
         case FLAG_STARDOME_HIGHMODE_ERROR:
+        case FLAG_STARDOME_OTA_TA_ERROR:
             return true;
         default:
             return false;
